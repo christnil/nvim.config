@@ -1,7 +1,7 @@
 local set = vim.keymap.set
 local k = vim.keycode
-local f = require "custom.f"
-local fn = f.fn
+local f = require("custom.f")
+-- local fn = f.fn
 
 -- Basic movement keybinds, these make navigating splits easy for me
 set("n", "<c-j>", "<c-w><c-j>")
@@ -12,10 +12,12 @@ set("n", "<c-h>", "<c-w><c-h>")
 set("n", "<leader>x", "<cmd>.lua<CR>", { desc = "Execute the current line" })
 set("v", "<leader>x", ":lua<CR>", { desc = "Execute the current selection" })
 set("n", "<leader><leader>x", "<cmd>source %<CR>", { desc = "Execute the current file" })
-set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
-set('n', '<Esc>', function()
-    vim.cmd.nohl()
+set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
+set("n", "<leader>tf", vim.diagnostic.open_float, { desc = "Toggle folating diagnostics window" })
+
+set("n", "<Esc>", function()
+  vim.cmd.nohl()
 end)
 -- Toggle hlsearch if it's on, otherwise just do "enter"
 set("n", "<CR>", function()
@@ -24,12 +26,12 @@ set("n", "<CR>", function()
     vim.cmd.nohl()
     return ""
   else
-    return k "<CR>"
+    return k("<CR>")
   end
 end, { expr = true })
 
-set("n", "]d", fn(vim.diagnostic.jump, { count = 1, float = true }))
-set("n", "[d", fn(vim.diagnostic.jump, { count = -1, float = true }))
+-- set("n", "]d", fn(vim.diagnostic.jump, { count = 1, float = true }))
+-- set("n", "[d", fn(vim.diagnostic.jump, { count = -1, float = true }))
 
 -- These mappings control the size of splits (height/width)
 set("n", "<M-,>", "<c-w>5<")
@@ -39,22 +41,22 @@ set("n", "<M-s>", "<C-W>-")
 
 set("n", "<M-j>", function()
   if vim.opt.diff:get() then
-    vim.cmd [[normal! ]c]]
+    vim.cmd([[normal! ]c]])
   else
-    vim.cmd [[m .+1<CR>==]]
+    vim.cmd([[m .+1<CR>==]])
   end
 end)
 
 set("n", "<M-k>", function()
   if vim.opt.diff:get() then
-    vim.cmd [[normal! [c]]
+    vim.cmd([[normal! [c]])
   else
-    vim.cmd [[m .-2<CR>==]]
+    vim.cmd([[m .-2<CR>==]])
   end
 end)
 
 set("n", "<space>tt", function()
-  vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = 0 }, { bufnr = 0 })
+  vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = 0 }), { bufnr = 0 })
 end)
 
 set("n", "j", function(...)
