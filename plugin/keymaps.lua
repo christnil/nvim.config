@@ -78,3 +78,18 @@ set("n", "k", function(...)
     return "k"
   end
 end, { expr = true })
+
+-- Meh + W => Write the current file
+vim.keymap.set('n', '<leader><leader>w', ':write<CR>', { noremap = true, silent = true, desc = 'Write the current file' })
+
+-- Meh + QW => Write and quit all files
+vim.keymap.set('n', '<leader><leader>qw', ':wa | qa<CR>', { noremap = true, silent = true, desc = 'Write and quit all files' })
+
+-- Meh + QQ => Quit the current file
+vim.keymap.set('n', '<leader><leader>qq', ':quit<CR>', { noremap = true, silent = true, desc = 'Quit the current file' })
+
+-- Meh + QA => Quit all files
+vim.keymap.set('n', '<leader><leader>qa', ':qa<CR>', { noremap = true, silent = true, desc = 'Quit all files' })
+
+-- Meh + QF => Force quit all files
+vim.keymap.set('n', '<leader>qf', ':qa!<CR>', { noremap = true, silent = true, desc = 'Force quit all files' })
